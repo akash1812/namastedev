@@ -2,9 +2,11 @@ import { useState } from "react";
 
 export default function App() {
   const [input, setInput] = useState("");
+
   const [chip, setChip] = useState([]);
+
   const handleKey = (e) => {
-    if (e.key === "Enter") {
+    if (e.key === "Enter" && input.trim() !== "") {
       setChip((prev) => [...prev, input]);
       setInput("");
     }
@@ -18,7 +20,7 @@ export default function App() {
 
   return (
     <div className="flex justify-center">
-      <div>
+      <div className="">
         <input
           className="border"
           type="text"
@@ -28,8 +30,9 @@ export default function App() {
           onKeyDown={(e) => handleKey(e)}
         />
         <br />
+        <div className = 'flex'>
         {chip.map((data, index) => (
-          <div className="bg-gray border rounded-xl text-center mb-2 mt-2">
+          <div className="flex-1 bg-gray border rounded-xl text-center mb-2 mt-2">
             {data}
             <button
               className="ml-16 text-red-400 hover:cursor-pointer"
@@ -39,6 +42,7 @@ export default function App() {
             </button>
           </div>
         ))}
+        </div>
       </div>
     </div>
   );
